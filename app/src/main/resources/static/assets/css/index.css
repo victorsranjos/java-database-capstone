@@ -1,4 +1,4 @@
-/* this is the style sheet file for index.htlm  */
+/* this is the style sheet file for index.html  */
 
 /* 
 **Global Reset (`*`)**
@@ -51,3 +51,284 @@
 * Use the same base green background (`#015c5d`) as the default button.
 * On hover, darken the background to deep teal (`#003e3e`) for visual feedback.
  */
+/* =========================
+   Global Reset
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* =========================
+   Layout
+========================= */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+
+    background-image: url("../images/logo/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
+}
+
+/* =========================
+   Headings
+========================= */
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #015c5d;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* =========================
+   Buttons
+========================= */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.role-btn,
+.dashboard-btn,
+.adminBtn {
+    padding: 12px 24px;
+    min-width: 180px;
+    border-radius: 8px;
+    background-color: #015c5d;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.5rem;
+}
+
+.role-btn:hover,
+.dashboard-btn:hover,
+.adminBtn:hover {
+    background-color: #017d7e;
+}
+
+/* =========================
+   Forms
+========================= */
+.input-field,
+.select-dropdown,
+input,
+select {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.input-field:focus,
+.select-dropdown:focus,
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #015c5d;
+    box-shadow: 0 0 5px rgba(1, 92, 93, 0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* =========================
+   Header
+========================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #015c5d;
+    color: white;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.header nav {
+    display: flex;
+    gap: 20px;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.header a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Footer
+========================= */
+.footer {
+    background: #222;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-logo {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-logo img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.footer-column h4 {
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    color: white;
+}
+
+/* =========================
+   Modal
+========================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content,
+#modal-body {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #015c5d;
+}
+
+/* =========================
+   Utility Classes
+========================= */
+.searchBar {
+    width: 100%;
+    max-width: 500px;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .role-btn,
+    .dashboard-btn,
+    .adminBtn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .filter-wrapper {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+}
+

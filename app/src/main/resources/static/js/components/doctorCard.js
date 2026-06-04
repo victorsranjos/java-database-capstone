@@ -39,3 +39,182 @@ Import the overlay function for booking appointments from loggedPatient.js
   Append doctor info and action buttons to the car
   Return the complete doctor card element
 */
+// doctorCard.js
+
+// These imports will exist in later labs
+// Uncomment when the service modules are available
+
+// import { deleteDoctor } from "../services/doctorService.js";
+// import { getPatientData } from "../services/patientService.js";
+// import { showBookingOverlay } from "./modals.js";
+
+export function createDoctorCard(doctor) {
+
+    const card = document.createElement("div");
+    card.classList.add("doctor-card");
+
+    const role = localStorage.getItem("userRole");
+
+    /* =========================
+       Doctor Information
+    ========================= */
+
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("doctor-info");
+
+    const name = document.createElement("h3");
+    name.textContent = doctor.name || "Unknown Doctor";
+
+    const specialization = document.createElement("p");
+    specialization.textContent =
+        `Specialty: ${doctor.specialization || doctor.specialty || "N/A"}`;
+
+    const email = document.createElement("p");
+    email.textContent =
+        `Email: ${doctor.email || "N/A"}`;
+
+    const availability = document.createElement("p");
+
+    if (Array.isArray(doctor.availability)) {
+        availability.textContent =
+            `Availability: ${doctor.availability.join(", ")}`;
+    } else {
+        availability.textContent =
+            `Availability: ${doctor.availability || "N/A"}`;
+    }
+
+    infoDiv.appendChild(name);
+    infoDiv.appendChild(specialization);
+    infoDiv.appendChild(email);
+    infoDiv.appendChild(availability);
+
+    /* =========================
+       Action Buttons
+    ========================= */
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.classList.add("card-actions");
+
+    /* =========================
+       Admin
+    ========================= */
+
+    if (role === "admin") {
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Delete";
+
+        removeBtn.addEventListener("click", async () => {
+
+            const confirmed =
+                confirm(`Delete ${doctor.name}?`);
+
+            if (!confirmed) return;
+
+            try {
+
+                const token =
+                    localStorage.getItem("token");
+
+                if (!token) {
+                    alert("Authentication required.");
+                    return;
+                }
+
+                /*
+                await deleteDoctor(
+                    doctor.id,
+                    token
+                );
+                */
+
+                card.remove();
+
+                alert("Doctor deleted successfully.");
+
+            } catch (error) {
+                console.error(error);
+                alert("Unable to delete doctor.");
+            }
+        });
+
+        actionsDiv.appendChild(removeBtn);
+    }
+
+    /* =========================
+       Patient (Not Logged In)
+    ========================= */
+
+    else if (role === "patient") {
+
+        const bookNow = document.createElement("button");
+
+        bookNow.textContent = "Book Now";
+
+        bookNow.addEventListener("click", () => {
+            alert("Patient needs to login first.");
+        });
+
+        actionsDiv.appendChild(bookNow);
+    }
+
+    /* =========================
+       Logged In Patient
+    ========================= */
+
+    else if (role === "loggedPatient") {
+
+        const bookNow = document.createElement("button");
+
+        bookNow.textContent = "Book Now";
+
+        bookNow.addEventListener("click", async (e) => {
+
+            try {
+
+                const token =
+                    localStorage.getItem("token");
+
+                if (!token) {
+                    alert("Session expired.");
+                    return;
+                }
+
+                /*
+                const patientData =
+                    await getPatientData(token);
+
+                showBookingOverlay(
+                    e,
+                    doctor,
+                    patientData
+                );
+                */
+
+                console.log(
+                    "Booking doctor:",
+                    doctor
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to load booking information."
+                );
+            }
+        });
+
+        actionsDiv.appendChild(bookNow);
+    }
+
+    /* =========================
+       Final Assembly
+    ========================= */
+
+    card.appendChild(infoDiv);
+    card.appendChild(actionsDiv);
+
+    return card;
+}

@@ -99,3 +99,106 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
 
     * Properly close the `<body>` and `<html>` tags to complete the document.
  -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Dashboard</title>
+
+    <link rel="icon"
+          type="image/png"
+          th:href="@{/assets/images/logo/logo.png}" />
+
+    <link rel="stylesheet"
+          th:href="@{/assets/css/adminDashboard.css}" />
+
+    <link rel="stylesheet"
+          th:href="@{/assets/css/doctorDashboard.css}" />
+
+    <link rel="stylesheet"
+          th:href="@{/assets/css/style.css}" />
+
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/util.js}" defer></script>
+
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
+    <script th:src="@{/js/components/patientRows.js}" defer></script>
+
+    <script type="module"
+            th:src="@{/js/services/patientServices.js}">
+    </script>
+
+    <script type="module"
+            th:src="@{/js/doctorDashboard.js}">
+    </script>
+</head>
+
+<body onload="renderContent()">
+
+<div class="container">
+    <div class="wrapper">
+
+        <!-- Dynamic Header -->
+        <div id="header"></div>
+
+        <main class="main-content">
+
+            <!-- Search -->
+            <div class="search-container">
+                <input
+                        type="text"
+                        id="searchBar"
+                        class="searchBar"
+                        placeholder="Search patient..."
+                />
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-wrapper">
+
+                <button
+                        id="todayButton"
+                        class="dashboard-btn">
+                    Today's Appointments
+                </button>
+
+                <input
+                        type="date"
+                        id="datePicker"
+                        class="input-field"
+                />
+
+            </div>
+
+            <!-- Patient Records Table -->
+            <table id="patientTable">
+
+                <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Phone No.</th>
+                    <th>Email</th>
+                    <th>Prescription</th>
+                </tr>
+                </thead>
+
+                <tbody id="patientTableBody">
+                <!-- Dynamic rows inserted here -->
+                </tbody>
+
+            </table>
+
+        </main>
+
+        <!-- Dynamic Footer -->
+        <div id="footer"></div>
+
+    </div>
+</div>
+
+</body>
+</html>
