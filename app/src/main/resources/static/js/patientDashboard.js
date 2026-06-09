@@ -106,11 +106,11 @@ window.signupPatient = async function () {
 
 window.loginPatient = async function () {
   try {
-    const email = document.getElementById("email").value;
+    const identifier = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     const data = {
-      email,
+      identifier,
       password
     }
     console.log("loginPatient :: ", data)
@@ -120,9 +120,13 @@ window.loginPatient = async function () {
     if (response.ok) {
       const result = await response.json();
       console.log(result);
-      selectRole('loggedPatient');
-      localStorage.setItem('token', result.token)
-      window.location.href = '/pages/loggedPatientDashboard.html';
+      if (result.token) {
+        selectRole('loggedPatient');
+        localStorage.setItem('token', result.token)
+        window.location.href = '/pages/loggedPatientDashboard.html';
+      } else {
+        alert(result.message || '❌ Invalid credentials!');
+      }
     } else {
       alert('❌ Invalid credentials!');
     }
@@ -131,6 +135,4 @@ window.loginPatient = async function () {
     alert("❌ Failed to Login : ", error);
     console.log("Error :: loginPatient :: ", error)
   }
-
-
 }

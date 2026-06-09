@@ -58,14 +58,14 @@
 */
 import { openModal } from "../components/modals.js";
 import { API_BASE_URL } from "../config/config.js";
-import { selectRole } from "../render.js";
 
-const ADMIN_API = API_BASE_URL + "/admin";
+const ADMIN_API = API_BASE_URL + "/admin/login";
 const DOCTOR_API = API_BASE_URL + "/doctor/login";
 
 window.onload = function () {
   const adminBtn = document.getElementById("adminLogin");
   const doctorBtn = document.getElementById("doctorLogin");
+  const patientBtn = document.getElementById("patientLogin");
 
   if (adminBtn) {
     adminBtn.addEventListener("click", () => {
@@ -78,14 +78,20 @@ window.onload = function () {
       openModal("doctorLogin");
     });
   }
+
+  if (patientBtn) {
+    patientBtn.addEventListener("click", () => {
+      window.selectRole("patient");
+    });
+  }
 };
 
 window.adminLoginHandler = async function () {
   try {
-    const username = document.getElementById("adminUsername").value;
+    const identifier = document.getElementById("adminUsername").value;
     const password = document.getElementById("adminPassword").value;
 
-    const admin = { username, password };
+    const admin = { identifier, password };
 
     const response = await fetch(ADMIN_API, {
       method: "POST",
@@ -98,8 +104,12 @@ window.adminLoginHandler = async function () {
     if (response.ok) {
       const data = await response.json();
 
-      localStorage.setItem("token", data.token);
-      selectRole("admin");
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.selectRole("admin");
+      } else {
+        alert(data.message || "Invalid credentials!");
+      }
     } else {
       alert("Invalid credentials!");
     }
@@ -111,10 +121,10 @@ window.adminLoginHandler = async function () {
 
 window.doctorLoginHandler = async function () {
   try {
-    const email = document.getElementById("doctorEmail").value;
+    const identifier = document.getElementById("doctorEmail").value;
     const password = document.getElementById("doctorPassword").value;
 
-    const doctor = { email, password };
+    const doctor = { identifier, password };
 
     const response = await fetch(DOCTOR_API, {
       method: "POST",
@@ -127,8 +137,12 @@ window.doctorLoginHandler = async function () {
     if (response.ok) {
       const data = await response.json();
 
-      localStorage.setItem("token", data.token);
-      selectRole("doctor");
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.selectRole("doctor");
+      } else {
+        alert(data.message || "Invalid credentials!");
+      }
     } else {
       alert("Invalid credentials!");
     }

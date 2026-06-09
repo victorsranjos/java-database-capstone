@@ -100,6 +100,24 @@ if (todayButton) {
 }
 
 /**
+ * All appointments button
+ */
+const allButton = document.getElementById("allButton");
+
+if (allButton) {
+  allButton.addEventListener("click", () => {
+    selectedDate = "all";
+
+    const datePicker = document.getElementById("datePicker");
+    if (datePicker) {
+      datePicker.value = "";
+    }
+
+    loadAppointments();
+  });
+}
+
+/**
  * Date picker filter
  */
 const datePicker = document.getElementById("datePicker");
@@ -118,21 +136,23 @@ if (datePicker) {
  */
 async function loadAppointments() {
   try {
-    const appointments = await getAllAppointments(
+    const data = await getAllAppointments(
       selectedDate,
       patientName,
       token
     );
+    const appointments = data.appointments || [];
 
     if (!patientTableBody) return;
 
     patientTableBody.innerHTML = "";
 
     if (!appointments || appointments.length === 0) {
+      const message = selectedDate === "all" ? "No Appointments found" : "No Appointments found for today";
       patientTableBody.innerHTML = `
         <tr>
           <td colspan="100%" class="text-center">
-            No Appointments found for today
+            ${message}
           </td>
         </tr>
       `;
@@ -145,7 +165,7 @@ async function loadAppointments() {
         appointment.patientData ||
         appointment;
 
-      const row = createPatientRow(patient, appointment);
+      const row = createPatientRow(patient, appointment.id);
 
       patientTableBody.appendChild(row);
     });

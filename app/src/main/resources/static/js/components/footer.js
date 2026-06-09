@@ -112,44 +112,46 @@ function renderFooter() {
 
     footer.innerHTML = `
         <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img
+                        src="/assets/images/logo/logo.png"
+                        alt="Clinic Logo"
+                    />
 
-            <div class="footer-logo">
-                <img
-                    src="/assets/images/logo/logo.png"
-                    alt="Clinic Logo"
-                />
+                    <p>
+                        Providing quality healthcare services through
+                        our Clinic Management System.
+                    </p>
+                </div>
 
-                <p>
-                    Providing quality healthcare services through
-                    our Clinic Management System.
-                </p>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+
+                        <a href="/">Home</a>
+                        <a href="#">Doctors</a>
+                        <a href="#">Appointments</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+
+                        <p>Email: clinic@example.com</p>
+                        <p>Phone: +27 00 000 0000</p>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+
+                        <p>
+                            © Copyright 2026
+                            Clinic Management System.
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            <div class="footer-column">
-                <h4>Quick Links</h4>
-
-                <a href="/">Home</a>
-                <a href="#">Doctors</a>
-                <a href="#">Appointments</a>
-            </div>
-
-            <div class="footer-column">
-                <h4>Contact</h4>
-
-                <p>Email: clinic@example.com</p>
-                <p>Phone: +27 00 000 0000</p>
-            </div>
-
-            <div class="footer-column">
-                <h4>Legal</h4>
-
-                <p>
-                    © Copyright 2026
-                    Clinic Management System.
-                    All Rights Reserved.
-                </p>
-            </div>
-
         </footer>
     `;
 }

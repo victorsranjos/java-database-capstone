@@ -130,12 +130,13 @@ export async function saveDoctor(doctor, token) {
  */
 export async function filterDoctors(name, time, specialty) {
   try {
-    const doctorName = name || "null";
-    const doctorTime = time || "null";
-    const doctorSpecialty = specialty || "null";
+    const params = new URLSearchParams();
+    if (name) params.append("name", name);
+    if (time) params.append("time", time);
+    if (specialty) params.append("specialty", specialty);
 
     const response = await fetch(
-      `${DOCTOR_API}/filter/${doctorName}/${doctorTime}/${doctorSpecialty}`
+      `${DOCTOR_API}/filter?${params.toString()}`
     );
 
     if (response.ok) {

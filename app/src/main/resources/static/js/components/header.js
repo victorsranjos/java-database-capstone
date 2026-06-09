@@ -129,10 +129,19 @@ function renderHeader() {
 
    if (!headerDiv) return;
 
-   // Homepage cleanup
-   if (window.location.pathname.endsWith("/")) {
+   // Homepage: clear session and render logo-only header
+   if (window.location.pathname === "/" || window.location.pathname.endsWith("/index.html")) {
        localStorage.removeItem("userRole");
        localStorage.removeItem("token");
+       headerDiv.innerHTML = `
+           <header class="header">
+               <div class="header-logo">
+                   <img src="/assets/images/logo/logo.png" alt="Clinic Logo">
+                   <span class="logo-title">Clinic Management System</span>
+               </div>
+           </header>
+       `;
+       return;
    }
 
    const role = localStorage.getItem("userRole");
@@ -155,7 +164,7 @@ function renderHeader() {
        <header class="header">
            <div class="header-logo">
                <img src="/assets/images/logo/logo.png" alt="Clinic Logo">
-               <h2>Clinic Management System</h2>
+               <span class="logo-title">Clinic Management System</span>
            </div>
 
            <nav class="header-nav">
@@ -179,7 +188,7 @@ function renderHeader() {
    // Doctor
    else if (role === "doctor") {
        headerContent += `
-           <a href="/doctorDashboard" id="homeBtn">
+           <a href="#" onclick="window.location.href='/doctorDashboard/' + localStorage.getItem('token')" id="homeBtn">
                Home
            </a>
 
@@ -265,7 +274,7 @@ function attachHeaderButtonListeners() {
    if (loginBtn) {
        loginBtn.addEventListener("click", () => {
            if (typeof openModal === "function") {
-               openModal("login");
+               openModal("patientLogin");
            }
        });
    }
@@ -275,7 +284,7 @@ function attachHeaderButtonListeners() {
    if (signupBtn) {
        signupBtn.addEventListener("click", () => {
            if (typeof openModal === "function") {
-               openModal("signup");
+               openModal("patientSignup");
            }
        });
    }
@@ -285,7 +294,7 @@ function attachHeaderButtonListeners() {
 
    if (appointmentsBtn) {
        appointmentsBtn.addEventListener("click", () => {
-           console.log("Appointments clicked");
+           window.location.href = '/pages/patientAppointments.html';
        });
    }
 }

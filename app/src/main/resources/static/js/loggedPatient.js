@@ -42,6 +42,7 @@ export function showBookingOverlay(e, doctor, patient) {
   modalApp.classList.add("modalApp");
 
   modalApp.innerHTML = `
+    <span class="close" id="closeBookingModal">&times;</span>
     <h2>Book Appointment</h2>
     <input class="input-field" type="text" value="${patient.name}" disabled />
     <input class="input-field" type="text" value="${doctor.name}" disabled />
@@ -58,6 +59,11 @@ export function showBookingOverlay(e, doctor, patient) {
   document.body.appendChild(modalApp);
 
   setTimeout(() => modalApp.classList.add("active"), 600);
+
+  modalApp.querySelector("#closeBookingModal").addEventListener("click", () => {
+    ripple.remove();
+    modalApp.remove();
+  });
 
   modalApp.querySelector(".confirm-booking").addEventListener("click", async () => {
     const date = modalApp.querySelector("#appointment-date").value;

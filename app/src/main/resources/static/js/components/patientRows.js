@@ -7,7 +7,7 @@ export function createPatientRow(patient, appointmentId, doctorId) {
       <td>${patient.name}</td>
       <td>${patient.phone}</td>
       <td>${patient.email}</td>
-      <td><img src="../assets/images/addPrescriptionIcon/addPrescription.png" alt="addPrescriptionIcon" class="prescription-btn" data-id="${patient.id}"></img></td>
+      <td><img src="/assets/images/addPrescriptionIcon/addPrescription.png" alt="addPrescriptionIcon" class="prescription-btn" data-id="${patient.id}"></img></td>
     `;
 
   // Attach event listeners

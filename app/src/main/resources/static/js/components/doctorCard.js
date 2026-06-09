@@ -44,9 +44,8 @@ Import the overlay function for booking appointments from loggedPatient.js
 // These imports will exist in later labs
 // Uncomment when the service modules are available
 
-// import { deleteDoctor } from "../services/doctorService.js";
-// import { getPatientData } from "../services/patientService.js";
-// import { showBookingOverlay } from "./modals.js";
+import { getPatientData } from "../services/patientServices.js";
+import { showBookingOverlay } from "../loggedPatient.js";
 
 export function createDoctorCard(doctor) {
 
@@ -180,7 +179,6 @@ export function createDoctorCard(doctor) {
                     return;
                 }
 
-                /*
                 const patientData =
                     await getPatientData(token);
 
@@ -188,12 +186,6 @@ export function createDoctorCard(doctor) {
                     e,
                     doctor,
                     patientData
-                );
-                */
-
-                console.log(
-                    "Booking doctor:",
-                    doctor
                 );
 
             } catch (error) {

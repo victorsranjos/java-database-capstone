@@ -109,29 +109,30 @@ and triggers modal-based login functionality.
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/assets/css/index.css">
-    <link rel="shortcut icon" href="/static/assets/images/logo/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="shortcut icon" href="/assets/images/logo/logo.png" type="image/x-icon">
     <title>CMS</title>
 </head>
 <body>
-    <main class="main-content">
-        <div class="container">
-            <div class="wrapper">
-                <div id="header"></div>
+    <div class="container">
+        <div class="wrapper">
+            <div id="header"></div>
+
+            <main class="main-content">
                 <h2>Select Your Role</h2>
-                    <button id="admin-btn" onclick="selectAdmin()">Admin</button>
-                    <button id="doctor-btn" onclick="selectDoctor()">Doctor</button>
-                    <button id="patient-btn" onclick="selectPatient()">Patient</button>
+                <button id="adminLogin" class="role-btn">Admin</button>
+                <button id="doctorLogin" class="role-btn">Doctor</button>
+                <button id="patientLogin" class="role-btn">Patient</button>
+            </main>
 
-                    <div id="modal" class="modal">
-                        <span id="closeModal" class="close">&times;</span>
-                        <div id="modal-body"></div>
-                    </div>
-
-                <div id="footer"></div>
+            <div id="modal" class="modal">
+                <span id="closeModal" class="close">&times;</span>
+                <div id="modal-body"></div>
             </div>
+
+            <div id="footer"></div>
         </div>
-    </main>
+    </div>
 
     <script src="./js/util.js" defer></script>
     <script src="./js/render.js" defer></script>

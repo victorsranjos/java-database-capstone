@@ -16,7 +16,7 @@ public class Doctor {
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
 //    - Required for persistence frameworks (e.g., Hibernate) to map the class to a database table.
 
-// 1. 'id' field:
+    // 1. 'id' field:
 //    - Type: private Long
 //    - Description:
 //      - Represents the unique identifier for each doctor.
@@ -26,7 +26,7 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-// 2. 'name' field:
+    // 2. 'name' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the doctor's name.
@@ -37,7 +37,7 @@ public class Doctor {
     @Size(min = 3, max = 100)
     private String name;
 
-// 3. 'specialty' field:
+    // 3. 'specialty' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the medical specialty of the doctor.
@@ -47,7 +47,7 @@ public class Doctor {
     @Size(min = 3, max = 50)
     private String specialty;
 
-// 4. 'email' field:
+    // 4. 'email' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the doctor's email address.
@@ -57,7 +57,7 @@ public class Doctor {
     @Email
     private String email;
 
-// 5. 'password' field:
+    // 5. 'password' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the doctor's password for login authentication.
@@ -69,7 +69,7 @@ public class Doctor {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-// 6. 'phone' field:
+    // 6. 'phone' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the doctor's phone number.
@@ -79,24 +79,24 @@ public class Doctor {
     @Pattern(regexp = "^[0-9]{10}$")
     private String phone;
 
-// 7. 'availableTimes' field:
+    // 7. 'availableTimes' field:
 //    - Type: private List<String>
 //    - Description:
 //      - Represents the available times for the doctor in a list of time slots.
 //      - Each time slot is represented as a string (e.g., "09:00-10:00", "10:00-11:00").
 //      - The @ElementCollection annotation ensures that the list of time slots is stored as a separate collection in the database.
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> availableTimes;
 
-// 8. Getters and Setters:
+    // 8. Getters and Setters:
 //    - Standard getter and setter methods are provided for all fields: id, name, specialty, email, password, phone, and availableTimes.
-    private Long getId () { return id; }
-    private String getName () { return name; }
-    private String getSpecialty () { return specialty; }
-    private String getEmail () { return email; }
-    private String getPassword () { return password; }
-    private String getPhone () { return phone; }
-    private List<String> getAvailableTimes () { return availableTimes; }
+    public Long getId () { return id; }
+    public String getName () { return name; }
+    public String getSpecialty () { return specialty; }
+    public String getEmail () { return email; }
+    public String getPassword () { return password; }
+    public String getPhone () { return phone; }
+    public List<String> getAvailableTimes () { return availableTimes; }
 
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }

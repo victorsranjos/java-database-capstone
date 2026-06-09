@@ -262,6 +262,8 @@ body {
     margin: 8% auto;
     padding: 2rem;
     border-radius: 12px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .close {

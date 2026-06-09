@@ -190,13 +190,11 @@ window.adminAddDoctor = async function () {
 
     const doctor = {
       name: document.getElementById("doctorName").value,
-      specialty: document.getElementById("doctorSpecialty").value,
+      specialty: document.getElementById("specialization").value,
       email: document.getElementById("doctorEmail").value,
       password: document.getElementById("doctorPassword").value,
-      mobileNo: document.getElementById("doctorMobile").value,
-      availabilityTime:
-        document.getElementById("doctorAvailabilityTime")?.value,
-      availability,
+      phone: document.getElementById("doctorPhone").value,
+      availableTimes: availability,
     };
 
     const result = await saveDoctor(doctor, token);
