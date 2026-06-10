@@ -269,8 +269,9 @@ public class DoctorService {
                                 .stream()
                                 .anyMatch(slot -> {
 
+                                    String startTimeStr = slot.contains("-") ? slot.split("-")[0] : slot;
                                     LocalTime time =
-                                            LocalTime.parse(slot);
+                                            LocalTime.parse(startTimeStr);
 
                                     if ("AM".equalsIgnoreCase(period)) {
                                         return time.isBefore(

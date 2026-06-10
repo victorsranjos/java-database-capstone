@@ -1,11 +1,14 @@
 package com.project.back_end.DTO;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class Login {
     
 // 1. 'identifier' field:
 //    - Type: private String
 //    - Description:
 //      - The unique identifier of the user attempting to log in (email for Doctor/Patient, username for Admin)
+    @JsonAlias({"email", "username"})
     private String identifier;
 
 // 2. 'password' field:
